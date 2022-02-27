@@ -14,8 +14,9 @@ import { useBestOfferStore } from './api/store';
 import { useBestOfferContext } from './utils/context';
 
 function BestOfferView() {
-  const [selectedPair, selectedSides] = useBestOfferStore(({ moduleState }) => [
-    moduleState.selectedPair,
+  const [fromAsset, toAsset,selectedSides] = useBestOfferStore(({ moduleState }) => [
+    moduleState.fromAsset,
+    moduleState.toAsset,
     moduleState.selectedSides
   ]);
   const { loading, submitHandler, data, error } = useBestOfferContext();
@@ -29,7 +30,7 @@ function BestOfferView() {
       <OrderSideFilter />
       <SubmitWrapper>
         {!loading && (
-          <Button onClick={submitHandler} disabled={!selectedPair || !selectedSides.length}>
+          <Button onClick={submitHandler} disabled={!fromAsset || !toAsset || !selectedSides.length}>
             Submit
           </Button>
         )}

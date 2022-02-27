@@ -13,19 +13,25 @@ import useMarkets from '../hooks/useMarkets';
 function PairInput() {
   const [data, defaultOption] = useMarkets();
 
-  const [assetSize, setSelectedPair, setAssetSize] = useBestOfferStore(
+  const [assetSize, setFromAsset, setToAsset, setAssetSize] = useBestOfferStore(
     ({ moduleState, actions }) => [
       moduleState.assetSize,
-      actions.setSelectedPair,
+      actions.setFromAsset,
+      actions.setToAsset,
       actions.setAssetSize
     ]
   );
   const assetPairChangeHandler = React.useCallback(
     (pair) => {
-      const { value } = pair;
-      setSelectedPair(value);
+      const { value, pairSide } = pair;
+      if(pairSide === 'from'){
+        setFromAsset(value)
+      }
+      if(pairSide === 'to'){
+        setToAsset(value)
+      }
     },
-    [setSelectedPair]
+    [setFromAsset,setToAsset]
   );
   const assetSizeChangeHandler = React.useCallback(
     (evt) => {
@@ -40,14 +46,15 @@ function PairInput() {
   return (
     <>
       <PairSelectWrapper>
-        <PairSelectTitle>Asset Pair</PairSelectTitle>
+        <PairSelectTitle>From</PairSelectTitle>
         <StyledPairSelect
           onChange={assetPairChangeHandler}
           styles={reselectStyles}
           defaultValue={defaultOption}
-          options={data}
+          options={data.from}
         />
       </PairSelectWrapper>
+
       <CustomOrderSizeWrapper>
         <PairSelectTitle>Asset Size</PairSelectTitle>
         <CustomOrderSizeInput
@@ -58,6 +65,15 @@ function PairInput() {
           type="number"
         />
       </CustomOrderSizeWrapper>
+      <PairSelectWrapper>
+        <PairSelectTitle>To</PairSelectTitle>
+        <StyledPairSelect
+          onChange={assetPairChangeHandler}
+          styles={reselectStyles}
+          defaultValue={defaultOption}
+          options={data.to}
+        />
+      </PairSelectWrapper>
     </>
   );
 }

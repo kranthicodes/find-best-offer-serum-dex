@@ -5,15 +5,23 @@ import produce from 'immer';
 export const useBestOfferStore = create(
   devtools((set, get) => ({
     moduleState: {
-      selectedPair: null,
+      fromAsset: null,
+      toAsset:null,
       assetSize: 0,
       selectedSides: []
     },
     actions: {
-      setSelectedPair(pairVal) {
+      setFromAsset(val) {
         set(
           produce((state) => {
-            state.moduleState.selectedPair = pairVal;
+            state.moduleState.fromAsset = val;
+          })
+        );
+      },
+      setToAsset(val) {
+        set(
+          produce((state) => {
+            state.moduleState.toAsset = val;
           })
         );
       },

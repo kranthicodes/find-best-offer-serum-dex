@@ -1,3 +1,4 @@
+import { MARKETS } from "@project-serum/serum";
 
 export function getBestOfferFromOrderBook(orderBookData, size, side, checkEq) {
   const orderBookArr = Array.from(orderBookData);
@@ -44,3 +45,13 @@ export function getBestOfferFromOrderBook(orderBookData, size, side, checkEq) {
     }
   });
 }
+export const getMarketDetails = (from, to) => {
+  const assetPair = `${from}/${to}`;
+  for (let i = 0; i < MARKETS.length; i++) {
+    const market = MARKETS[i];
+    if (market.name === assetPair && !market.deprecated) {
+      return market;
+    }
+  }
+  throw new Error('Pair not supported.')
+};

@@ -26,7 +26,7 @@ export const Title = styled.h2`
 `;
 
 export const PairSelectWrapper = styled.div`
-  margin-top: 24px;
+  margin-top: 16px;
   text-align: left;
   padding: 0 16px;
   @media ${device.laptop} {
