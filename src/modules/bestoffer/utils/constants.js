@@ -1,0 +1,1 @@
+export const SOLANA_MAINNET_CLUSTER_URL= 'https://solana-api.projectserum.com'
