@@ -3,7 +3,7 @@ import { Market } from '@project-serum/serum';
 import { Connection } from '@solana/web3.js';
 import { useBestOfferStore } from '../api/store';
 import { getBestOfferFromOrderBook } from '../api/orderBookHelpers';
-import { execBasedOnOrderSide,checkEq } from '../utils/iterableHelpers';
+import { execBasedOnOrderSide, checkEq } from '../utils/iterableHelpers';
 import { SOLANA_MAINNET_CLUSTER_URL } from '../utils/constants';
 
 export default function useBestOffer() {
@@ -22,6 +22,7 @@ export default function useBestOffer() {
       try {
         if (error) {
           setError(null);
+          setData([]);
         }
         setLoading(true);
         const { address: marketAddress, programId: programAddress } = selectedPair;
