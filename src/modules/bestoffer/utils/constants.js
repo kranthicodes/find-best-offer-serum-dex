@@ -1,1 +1,1 @@
-export const SOLANA_MAINNET_CLUSTER_URL= 'https://api.mainnet-beta.solana.com'
+export const SOLANA_MAINNET_CLUSTER_URL= 'https://api.metaplex.solana.com'
